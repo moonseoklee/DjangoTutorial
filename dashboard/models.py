@@ -11,8 +11,9 @@ class Item(models.Model):
 
 class Comment(models.Model):
     item = models.ForeignKey(Item,on_delete=models.CASCADE)
+    id = models.AutoField(primary_key=True)
     comment =  models.CharField(max_length=200)
     author = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.item
+        return self.comment

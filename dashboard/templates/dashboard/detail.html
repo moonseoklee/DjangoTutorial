@@ -26,14 +26,36 @@
         </div>
 
     </form>
-    
+
 </div>
 <div class="center">
-    <ul class="list-group">
-        {% for comment in comments%}
-        <li class="list-group-item">{{ comment.comment }}</li>
-        {% endfor %}
-    </ul>
+
+    <table class='table' style="margin-top: 50px;width:50%">
+        <thead>
+            <tr>
+                <td><B>댓쓴이</B></td>
+                <td><B>내용</B></td>
+                <td><B>지우기</B></td>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for comment in comments %}
+            <tr>
+                <td>{{comment.author}}</td>
+                <td>{{comment.comment}}</td>
+                <td>
+                    <form action="{% url 'dashboard:deleteComment' item.id comment.id%}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        <tbody>
+    </table>
 </div>
 
 {% endblock %}

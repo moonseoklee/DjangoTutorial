@@ -1,4 +1,5 @@
 import os
+from . import mysql_settings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'bootstrap4',
-    'polls.apps.PollsConfig',
+    
     'login.apps.LoginConfig',
     'dashboard.apps.DashboardConfig',
     'django.contrib.admin',
@@ -65,12 +66,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = mysql_settings.DATABASES
 
 
 # Password validation
