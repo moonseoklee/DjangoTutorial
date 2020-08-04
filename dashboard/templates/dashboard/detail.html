@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+<div class="row justify-content-md-center" style="margin-top: 100px;">
+    <ul class="list-group">
+        <li class="list-group-item">{{ item.title }}</li>
+        <li class="list-group-item">{{ item.contents }}</li>
+        <li class="list-group-item">{{ item.author }}</li>
+
+    </ul>
+
+
+</div>
+
+
+<div class="row justify-content-md-center" style="margin-top: 100px;">
+
+    <form action="{% url 'dashboard:detail' item.id%}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="comment">Comment:</label>
+            <input id="comment" name="comment"></input>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+    </form>
+    
+</div>
+<div class="center">
+    <ul class="list-group">
+        {% for comment in comments%}
+        <li class="list-group-item">{{ comment.comment }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

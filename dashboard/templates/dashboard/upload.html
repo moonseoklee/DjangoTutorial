@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="center" style="margin-top: 100px;">
+<form action="{% url 'dashboard:upload'%}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+    <label for="title">Title</label><br>
+    <input type="text" id="title" name="title"><br>
+    <div class="form-group">
+    <label for="contents">Contents</label><br>
+    <input type="text" id="contents" name="contents"><br><br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form> 
+</div>
+{% endblock %}

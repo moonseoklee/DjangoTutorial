@@ -1,0 +1,12 @@
+.right {
+    position: absolute;
+    right: 0px;
+    
+}
+
+.center{
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    align-items: center;
+}
