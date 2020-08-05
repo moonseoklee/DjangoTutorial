@@ -54,11 +54,12 @@ def deleteComment(request,itemId,commentId):
 
     item = get_object_or_404(Item,pk=itemId)
     if request.method=='POST':
-        print(type(request.user),type(comment.author))
+        
         if str(request.user)==comment.author:
             comment.delete()
         else:
             messages.info(request,'자신의 댓글만 삭제 가능!')
+        
         return HttpResponseRedirect("/dashboard/"+str(itemId))
 
     return render(request,'dashboard/detail.html',context={'item':item,'comments':item.comment_set.all()})
