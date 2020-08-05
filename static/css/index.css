@@ -1,10 +1,17 @@
 .right {
     position: absolute;
-    right: 0px;
+    float:left;
+    
+}
+
+.left {
+    position: absolute;
+    float:left;
     
 }
 
 .center{
+    
     display: flex;
     flex-wrap: wrap; 
     justify-content: center; 

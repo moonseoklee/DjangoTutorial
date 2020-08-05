@@ -19,7 +19,7 @@ def signUp(request):
     return render(request,'login/signUp.html',{'signUpForm':signUpForm})
 
 def login(request):
-
+    
     if request.method == 'POST':
         
 

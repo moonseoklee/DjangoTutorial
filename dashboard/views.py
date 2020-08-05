@@ -1,11 +1,14 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponseRedirect,HttpResponse,Http404
-
+from django.contrib.auth.decorators import login_required
 from .models import Item,Comment
 from .forms import ItemForm,CommentsForm
 from django.core.paginator import Paginator
+from django.contrib import messages
 # Create your views here.
 
+
+@login_required
 def list(request):
     items = Item.objects.all()
     pagingItems = Paginator(items,10)
@@ -15,7 +18,7 @@ def list(request):
     context =  {'items':pagedItems}
     
     return render(request,'dashboard/list.html',context)
-
+@login_required
 def upload(request):
     
     if request.method == 'POST':
@@ -29,7 +32,7 @@ def upload(request):
         return HttpResponseRedirect("/dashboard")
 
     return render(request,"dashboard/upload.html")
-
+@login_required
 def detail(request,itemId):    
     if request.method == 'POST':
         commentsForm = CommentsForm(request.POST)         
@@ -44,14 +47,18 @@ def detail(request,itemId):
     item = get_object_or_404(Item,pk=itemId)
     return render(request,'dashboard/detail.html',context={'item':item,'comments':item.comment_set.all()})
 
-
+@login_required
 def deleteComment(request,itemId,commentId):
     
     comment = get_object_or_404(Comment,pk=commentId)
 
     item = get_object_or_404(Item,pk=itemId)
     if request.method=='POST':
-        comment.delete()
+        print(type(request.user),type(comment.author))
+        if str(request.user)==comment.author:
+            comment.delete()
+        else:
+            messages.info(request,'자신의 댓글만 삭제 가능!')
         return HttpResponseRedirect("/dashboard/"+str(itemId))
 
     return render(request,'dashboard/detail.html',context={'item':item,'comments':item.comment_set.all()})

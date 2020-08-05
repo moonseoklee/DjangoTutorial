@@ -3,59 +3,62 @@
 {% block content %}
 
 
-<div class="row justify-content-md-center" style="margin-top: 100px;">
-    <ul class="list-group">
-        <li class="list-group-item">{{ item.title }}</li>
-        <li class="list-group-item">{{ item.contents }}</li>
-        <li class="list-group-item">{{ item.author }}</li>
 
-    </ul>
+    <div class="row justify-content-center" style="margin-top: 100px;">
+        <ul class="list-group">
+            <li class="list-group-item">{{ item.title }}</li>
+            <li class="list-group-item">{{ item.contents }}</li>
+            <li class="list-group-item">{{ item.author }}</li>
 
-
-</div>
+        </ul>
 
 
-<div class="row justify-content-md-center" style="margin-top: 100px;">
+    </div>
 
-    <form action="{% url 'dashboard:detail' item.id%}" method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="comment">Comment:</label>
-            <input id="comment" name="comment"></input>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
 
-    </form>
+    <div class="row justify-content-center" style="margin-top: 100px;">
 
-</div>
-<div class="center">
+        <form action="{% url 'dashboard:detail' item.id%}" method="POST">
+            {% csrf_token %}
 
-    <table class='table' style="margin-top: 50px;width:50%">
-        <thead>
-            <tr>
-                <td><B>댓쓴이</B></td>
-                <td><B>내용</B></td>
-                <td><B>지우기</B></td>
+            <div class="md-form">
+                <i class="fas fa-pencil-alt prefix"></i>
+                <textarea id="comment" name="comment" class="md-textarea form-control" style="width: 400px;" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Submit</button>
 
-            </tr>
-        </thead>
-        <tbody>
-            {% for comment in comments %}
-            <tr>
-                <td>{{comment.author}}</td>
-                <td>{{comment.comment}}</td>
-                <td>
-                    <form action="{% url 'dashboard:deleteComment' item.id comment.id%}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" class="close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        <tbody>
-    </table>
-</div>
+
+        </form>
+
+    </div>
+    <div class="center">
+
+        <table class='table' style="margin-top: 50px;width:50%">
+            <thead>
+                <tr>
+                    <td><B>댓쓴이</B></td>
+                    <td><B>내용</B></td>
+                    <td><B>지우기</B></td>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for comment in comments %}
+                <tr>
+                    <td>{{comment.author}}</td>
+                    <td>{{comment.comment}}</td>
+                    <td>
+                        <form action="{% url 'dashboard:deleteComment' item.id comment.id%}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="close" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            <tbody>
+        </table>
+    </div>
 
 {% endblock %}
