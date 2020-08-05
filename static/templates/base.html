@@ -8,20 +8,23 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/util.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
     <div style="height:100px">
         <div style="float:left ; width:33% ; ">
-            <button class="btn" onclick="location.href='{% url 'dashboard:list' %}'"><i class="fa fa-home"></i></button>
+            <button class="btn" onclick="location.href='{% url 'dashboard:list' %}'"><i class="fa fa-home" style="font-size:40px;color:rgb(110, 4, 4)"></i></button>
         </div>
         {% if user.is_authenticated %}
         <div style="float:left ; width:33% ; text-align: center;">
             <h2>{{ user.get_username }}</h2>
         </div>
         <div style="float:right ; width:33% ;text-align:end">
-            <button type="button" class="btn btn-primary"
-                onclick="location.href='{% url 'login:logout' %}'">Logout</button>
+            <button 
+                onclick="location.href='{% url 'login:logout' %}'"><i class="fa fa-sign-out" style="font-size:40px; color: rgb(110, 4, 4);"></i></button>
         </div>
         {% else %}
 

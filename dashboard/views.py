@@ -8,7 +8,7 @@ from django.contrib import messages
 # Create your views here.
 
 
-@login_required
+@login_required(login_url="/login")
 def list(request):
     items = Item.objects.all()
     pagingItems = Paginator(items,10)
@@ -18,7 +18,7 @@ def list(request):
     context =  {'items':pagedItems}
     
     return render(request,'dashboard/list.html',context)
-@login_required
+@login_required(login_url="/login")
 def upload(request):
     
     if request.method == 'POST':
@@ -32,7 +32,7 @@ def upload(request):
         return HttpResponseRedirect("/dashboard")
 
     return render(request,"dashboard/upload.html")
-@login_required
+@login_required(login_url="/login")
 def detail(request,itemId):    
     if request.method == 'POST':
         commentsForm = CommentsForm(request.POST)         
@@ -47,7 +47,7 @@ def detail(request,itemId):
     item = get_object_or_404(Item,pk=itemId)
     return render(request,'dashboard/detail.html',context={'item':item,'comments':item.comment_set.all()})
 
-@login_required
+@login_required(login_url="/login")
 def deleteComment(request,itemId,commentId):
     
     comment = get_object_or_404(Comment,pk=commentId)

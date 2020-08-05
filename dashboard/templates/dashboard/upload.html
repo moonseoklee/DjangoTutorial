@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-<div class="row justify-content-center">
-<form action="{% url 'dashboard:upload'%}" method="POST">
-    {% csrf_token %}
-    <div class="form-group">
-    <label for="title">Title</label><br>
-    <input type="text" id="title" name="title"><br>
-    <div class="form-group">
-    <label for="contents">Contents</label><br>
-    <input type="text" id="contents" name="contents"><br><br>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form> 
-</div>
+<section class="get-in-touch">
+    <h1 class="title">Write Something</h1>
+    <form class="contact-form row" action="{% url 'dashboard:upload'%}" method="POST">
+        {% csrf_token %}
+       <div class="form-field col-lg-12">
+        <input id="title" class="input-text js-input" type="text" name="title" required>
+        <label class="label" for="title">Title</label>
+     </div>
+       <div class="form-field col-lg-12">
+          <input id="contents" class="input-text js-input" name="contents" type="text" required>
+          <label class="label" for="contents">Contents</label>
+       </div>
+       <div class="form-field col-lg-12">
+          <input class="submit-btn" type="submit" value="업로드">
+       </div>
+    </form>
+ </section>
+ 
 {% endblock %}

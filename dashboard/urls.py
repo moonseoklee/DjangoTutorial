@@ -7,5 +7,5 @@ urlpatterns = [
     path('',views.list,name='list'), 
     path('upload/',views.upload,name='upload'),
     path('<int:itemId>/',views.detail,name='detail'),
-    path('<int:itemId>/deleteComment/<int:commentId>',views.deleteComment,name='deleteComment')
+    path('<int:itemId>/comment/<int:commentId>',views.deleteComment,name='deleteComment')
 ]
